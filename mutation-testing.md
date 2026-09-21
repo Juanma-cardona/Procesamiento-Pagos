@@ -85,29 +85,55 @@ vaciar el método, cambiar el `reference`, etc.) pasaba desapercibida.
 
 ## 3. Resultado final
 
-> Completar esta sección con la salida real de `npm run test:coverage` y
-> `npm run stryker` después de aplicar las correcciones.
+Tras aplicar las correcciones, se volvieron a ejecutar las pruebas con
+cobertura y mutation testing.
 
-### Code coverage
-
-```
-(pegar aquí la salida de `npm run test:coverage`)
-```
-
-### Mutation testing
+### Code coverage (`npm run test:coverage`)
 
 ```
-(pegar aquí la salida de `npm run stryker`)
+ Test Files  2 passed (2)
+      Tests  16 passed (16)
+   Start at  13:23:46
+   Duration  580ms (transform 164ms, setup 0ms, import 252ms, tests 32ms, environment 0ms)
+
+ % Coverage report from v8
+----------------------|---------|----------|---------|---------|-------------------
+File                  | % Stmts | % Branch | % Funcs | % Lines | Uncovered Line #s
+----------------------|---------|----------|---------|---------|-------------------
+All files             |     100 |       90 |     100 |     100 |
+ providers            |     100 |      100 |     100 |     100 |
+  payment.provider.ts |     100 |      100 |     100 |     100 |
+ services             |     100 |       90 |     100 |     100 |
+  payment.service.ts  |     100 |       90 |     100 |     100 | 24
+----------------------|---------|----------|---------|---------|-------------------
 ```
 
-**Mutation score total: ___%** (antes: 61.29%)
+Las pruebas pasaron de 7 a **16** (7 de `PaymentService` + 5 de
+`PaymentProvider`, más la prueba nueva de whitespace). `payment.provider.ts`
+pasó de 0% a **100%** en las cuatro métricas.
+
+### Mutation testing (`npm run stryker`)
+
+```
+Mutation Score
+                          | Of total | Of covered | Killed | Survived | Timeout | No coverage | Detected | Undetected | Total
+All files                 |    96.77 |     100.00 |     30 |        0 |       0 |           1 |       30 |          1 |   31
+ providers/payment.provider.ts |  100.00 |    100.00 |      7 |        0 |       0 |           0 |        7 |          0 |    7
+ services/payment.service.ts   |   95.83 |    100.00 |     23 |        0 |       0 |           1 |       23 |          1 |   24
+```
+
+**Mutation score total: 96.77%** (of covered: 100.00%)
+
+Los **4 mutantes sobrevivientes** desaparecieron por completo (0 `survived`).
+`payment.provider.ts` pasó de 0/7 detectados a **7/7**.
 
 ## 4. Comparación
 
 | Métrica | Inicial | Final |
 |---|---|---|
-| Mutation score total | 61.29% | ___ |
-| Mutantes sobrevivientes | 4 | ___ |
-| Mutantes sin cobertura (`NoCoverage`) | 8 | ___ |
-| Coverage `payment.provider.ts` | 0% | ___ |
-| Coverage branches `payment.service.ts` | 90% | ___ |
+| Mutation score total | 61.29% | **96.77%** |
+| Mutantes sobrevivientes | 4 | **0** |
+| Mutantes sin cobertura (`NoCoverage`) | 8 | **1** |
+| Coverage `payment.provider.ts` | 0% | **100%** |
+| Coverage branches `payment.service.ts` | 90% | 90% (queda 1 rama sin cubrir) |
+| Total de pruebas | 7 | **16** |
