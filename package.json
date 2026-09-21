@@ -28,5 +28,13 @@
   "directories": {
     "test": "test"
   },
-  "type": "commonjs"
+  "type": "commonjs",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Juanma-cardona/Procesamiento-Pagos.git"
+  },
+  "bugs": {
+    "url": "https://github.com/Juanma-cardona/Procesamiento-Pagos/issues"
+  },
+  "homepage": "https://github.com/Juanma-cardona/Procesamiento-Pagos#readme"
 }
