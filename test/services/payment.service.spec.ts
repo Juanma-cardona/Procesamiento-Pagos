@@ -59,6 +59,48 @@ describe("PaymentService", () => {
         expect(providerMock.sendPayment).not.toHaveBeenCalled();
     });
 
+    it("should throw an error when the user is only whitespace", async () => {
+        // Arrange
+        const providerMock = createProviderMock();
+        const service = new PaymentService(providerMock);
+
+        // Act & Assert
+        await expect(
+            service.processPayment({ userId: "   ", amount: 1000 })
+        ).rejects.toThrow("El usuario es obligatorio");
+        expect(providerMock.sendPayment).not.toHaveBeenCalled();
+    });it("should throw an error when the user is only whitespace", async () => {
+        // Arrange
+        const providerMock = createProviderMock();
+        const service = new PaymentService(providerMock);
+
+        // Act & Assert
+        await expect(
+            service.processPayment({ userId: "   ", amount: 1000 })
+        ).rejects.toThrow("El usuario es obligatorio");
+        expect(providerMock.sendPayment).not.toHaveBeenCalled();
+    });it("should throw an error when the user is only whitespace", async () => {
+        // Arrange
+        const providerMock = createProviderMock();
+        const service = new PaymentService(providerMock);
+
+        // Act & Assert
+        await expect(
+            service.processPayment({ userId: "   ", amount: 1000 })
+        ).rejects.toThrow("El usuario es obligatorio");
+        expect(providerMock.sendPayment).not.toHaveBeenCalled();
+    });it("should throw an error when the user is only whitespace", async () => {
+        // Arrange
+        const providerMock = createProviderMock();
+        const service = new PaymentService(providerMock);
+
+        // Act & Assert
+        await expect(
+            service.processPayment({ userId: "   ", amount: 1000 })
+        ).rejects.toThrow("El usuario es obligatorio");
+        expect(providerMock.sendPayment).not.toHaveBeenCalled();
+    });
+
     it("should throw an error when the amount is 0 (boundary value)", async () => {
         // Arrange
         const providerMock = createProviderMock();
